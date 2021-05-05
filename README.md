@@ -104,4 +104,3 @@ Note that some arguments affects only Apple Pay or Google Pay. For example, **pa
 - [ ] Complete docs
 - [ ] Add merchant capabilities support
 - [ ] Add billing and shipping info support
-
