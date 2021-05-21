@@ -161,7 +161,7 @@ class FlutterPayPlugin : FlutterPlugin, MethodCallHandler, PluginRegistry.Activi
     private fun requestPayment(args: Map<String, Any>) {
         val items = args["items"] as? List<Map<String, String>>
         val allowedPaymentNetworks = args["allowedPaymentNetworks"] as List<String>
-        val allowedAuthMethods = args["allowedAuthMethods"] as List<String>
+        val allowedAuthMethods = args["allowedAuthMethods"] as? List<String>
         val currencyCode = args["currencyCode"] as? String
         val countryCode = args["countryCode"] as? String
         val emailRequired = args["emailRequired"] as? Boolean
@@ -184,11 +184,8 @@ class FlutterPayPlugin : FlutterPlugin, MethodCallHandler, PluginRegistry.Activi
             availablePaymentNetworks
         }
 
-        val authMethods: List<String> = if (allowedAuthMethods.count() > 0) {
-            allowedAuthMethods.mapNotNull { decodeAuthMethods(it) }
-        } else {
-            availableAuthMethods
-        }
+        val authMethods: List<String> = availableAuthMethods
+
         print("requestPayment, authMethods: ${authMethods}\n")
 
         if (totalPrice <= 0.0) {
